@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Interfaces;
+using System;
+using System.Reflection;
 
 namespace DependencyInjection
 {
@@ -10,6 +8,10 @@ namespace DependencyInjection
     {
         static void Main(string[] args)
         {
+            var assemblyExterno = Assembly.LoadFile(@"C:\Users\Arkano\source\repos\DependencyInjection\Implementation\bin\Debug\Implementation.dll");
+            var tipos = assemblyExterno.GetExportedTypes();
+            IFuncionalidad objetoConcreto = (IFuncionalidad)Activator.CreateInstance(tipos[0]);
+            Console.WriteLine(objetoConcreto.ObtenerText());
         }
     }
 }
